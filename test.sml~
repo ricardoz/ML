@@ -1,0 +1,25 @@
+(* problem 1: is older
+take two dates y/m/d
+return true if the first comes before the second*)
+
+fun is_older(date1: int*int*int, date2: int*int*int) =
+    if (#1 date1) < (#1  date2)
+    then true
+    else if (#1 date1) = (#1 date2) andalso (#2 date1) < (#2 date2)
+    then true
+    else if (#1 date1) = (#1 date2) andalso (#2 date1) = (#2 date2) andalso (#3 date1) < (#3 date2)
+    then true
+    else false
+
+fun number_in_month(xs : (int*int*int list), month : int) =
+	if null xs
+	then 0
+	else if (#2 hd(xs)) = month
+	then 1 + number_in_month(tl xs, month)
+	else 0 + number_in_month(tl xs, month)
+
+
+
+							    
+			
+				
