@@ -53,22 +53,69 @@ fun date_to_string(date : int*int*int) =
 Int.toString((#1 date))
 
 fun number_before_reaching_sum(sum : int, numbers: int list) =
-	if (hd numbers) > sum
-	then 1
+	if (hd numbers) >=  sum
+	then 0
 	else 1 + number_before_reaching_sum(sum - (hd numbers), tl(numbers)) 
 
 
-fun month_in_year(day_of_year : int) =
-	number_before_reaching_sum(day_of_year, dim)
+fun what_month(day_of_year : int) =
+	number_before_reaching_sum(day_of_year, dim) + 1
 
 
-fun month_range(date1: int*int*int, date2: int*int*int) =
-	if (#2 date2) > (#2 date1)
+fun month_range(date1: int, date2: int) =
+	if (date2) > (date1)
 	then []
-	else (#2 date1) :: month_range(((#1 date1), (#2 date1) + 1, (#3 date1)), date2)
+	else (date1) :: month_range((date1), date2 - 1)
+
+
+fun oldest(dates : (int*int*int) list) =
+	if null dates
+	then NONE
+	else let
+		fun ne_oldest(dates : (int*int*int) list) =
+			if null (tl dates)
+		then hd dates
+		else  let val ans = ne_oldest(tl dates)
+			in
+				if is_older(hd dates, ans)
+				then hd dates
+				else ans
+			end
+
+		in
+			SOME (ne_oldest dates)
+		end
+
+fun contains(xs  : int list, obj : int) =
+	if null xs
+	then false
+	else if hd xs = obj 
+	then true 
+	else contains(tl xs, obj)
+
+
+fun remove_duplicates(xs  : int list) = 
+	if null xs
+	then []
+	else if contains(tl xs, hd xs)
+	then remove_duplicates(tl xs)
+	else hd xs :: remove_duplicates(tl xs)
+
+
+
+fun number_in_months_challenge(xs : (int*int*int) list, months : int list) =
+    number_in_months(xs, remove_duplicates(months))
+
+fun dates_in_months_challenge(xs : (int*int*int) list, months : int list) =
+    dates_in_months(xs, remove_duplicates(months))
+
+
+
+(*fun reasonable_date(date : int*int*int) =*) 
+    
+
 
 
 							 
-
 
 				

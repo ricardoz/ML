@@ -1,0 +1,104 @@
+val dates = [(1,1,1),(1,2,2),(3,6,12),(5,6,9)]
+val ms = [6,1]
+val monthNames = ["January","February","March","April","May","June",
+"July","August","September","October", "November", "December"]
+val numbers = [1,2,3,4,5,6,7,8,9,10,11,12]
+val dim =[31,28,31,30,31,30,31,31,30,31,30,31]
+
+
+(* is older *)
+(* year less month greater day greater *)
+is_older((1,2,2),(2,1,1)) = true;
+
+(* year + month - day - *)
+is_older((2,1,1),(1,2,2)) = false;
+
+(* year = month - day + *)
+is_older((2,1,3),(2,2,2)) = true;
+
+(* year = month + day - *)
+is_older((2,3,1),(2,2,2)) = false;
+
+(* year = month = day - *)
+is_older((2,2,1),(2,2,2)) = true;
+
+(* year = month = day + *)
+is_older((2,2,2),(2,2,3)) = false;
+
+
+(* number in month *)
+val dates = [(1,1,1),(1,2,2),(3,6,12),(5,6,9)]
+number_in_month(dates, 1) = 1;
+number_in_month(dates, 2) = 1;
+number_in_month(dates, 6) = 2;
+number_in_month(dates, 3) = 0;
+
+
+(* number in months *)
+number_in_months(dates, []) = 0;
+number_in_months(dates, [6]) = 2;
+number_in_months(dates, [1,6]) = 3;
+number_in_months(dates, [3,6]) = 2;
+
+(* dates in month *)
+dates_in_month(dates, 1) = (1,1,1);
+dates_in_month(dates, 2) = (1,2,2);
+dates_in_month(dates, 3) = [];
+
+(* dates in months *)
+dates_in_months(dates, [1,2]) = ((1,1,1), (1,2,2));
+dates_in_months(dates, [2,6]) = ((1,2,2),(3,6,12),(5,6,9));
+
+(* get nth *)
+val monthNames = ["January","February","March","April","May","June",
+"July","August","September","October", "November", "December"]
+
+get_nth(monthNames, 1) = "January";
+get_nth(monthNames, 6) = "June";
+get_nth(monthNames, 12) = "December";
+
+
+(* date to string *)
+date_to_string(1,1,1) = "January 1, 1";
+date_to_string(10,10,10) = "October 10, 10";
+
+(* number before reaching sum *)
+val numbers = [1,2,3,4,5,6,7,8,9,10,11,12]
+number_before_reaching_sum(numbers, 0) = 0;
+number_before_reaching_sum(numbers, 2) = 1;
+number_before_reaching_sum(numbers, 3) = 1;
+number_before_reaching_sum(numbers, 78) = 11;
+
+(* what month *)
+what_month(0) = 1;
+what_month(32) = 2;
+what_month(60) = 3;
+what_month(360) = 12;
+
+(* month range *)
+month_range((1,1,1),(1,1,1) = [1];
+month_range((1,2,1),(1,1,1) = [];
+month_range((1,1,1),(1,2,1) = [1,2];
+month_range((1,1,1),(1,6,1) = [1,2,3,4,5,6];
+month_range((1,1,1),(2,1,1) = [1];
+
+
+(* oldest *)
+val dates = [(1,1,1),(1,2,2),(3,6,12),(5,6,9)]
+oldest(dates) = (1,1,1);
+
+(* nim challenge *)
+number_in_months(dates, [6,6]) = 2;
+number_in_months(dates, [1,6,6]) = 3;
+number_in_months(dates, [3,6,6]) = 2;
+
+(* dim challenge *)
+(* dates in months *)
+dates_in_months(dates, [1,2,2]) = ((1,1,1), (1,2,2));
+dates_in_months(dates, [2,6,6]) = ((1,2,2),(3,6,12),(5,6,9));
+
+
+
+
+
+
